@@ -117,3 +117,19 @@ def toggle_assign_to_car(request, pk):
     else:
         driver.cars.add(pk)
     return HttpResponseRedirect(reverse_lazy("taxi:car-detail", args=[pk]))
+
+
+@login_required
+def search_car_view(request):
+    if request.method == "POST":
+        query = request.POST.get("search", "")
+        result = Car.objects.filter(model__icontains=query)
+        return render(request, "taxi/car_list.html", context={"car_list": result})
+
+
+@login_required
+def search_driver(request):
+    if request.method == "GET":
+        query = request.GET.get("search", "")
+        result = Driver.objects.filter(username__icontains=query)
+        return render(request, "taxi/driver_list.html", context={"driver_list": result})
