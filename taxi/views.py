@@ -120,16 +120,15 @@ def toggle_assign_to_car(request, pk):
 
 
 @login_required
-def search_car_view(request):
+def search(request):
     if request.method == "POST":
         query = request.POST.get("search", "")
-        result = Car.objects.filter(model__icontains=query)
-        return render(request, "taxi/car_list.html", context={"car_list": result})
-
-
-@login_required
-def search_driver(request):
-    if request.method == "GET":
-        query = request.GET.get("search", "")
-        result = Driver.objects.filter(username__icontains=query)
-        return render(request, "taxi/driver_list.html", context={"driver_list": result})
+        if request.path == "/cars/search/":
+            result = Car.objects.filter(model__icontains=query)
+            return render(request, "taxi/car_list.html", context={"car_list": result})
+        elif request.path == "/driver/search/":
+            result = Driver.objects.filter(username__icontains=query)
+            return render(request, "taxi/driver_list.html", context={"driver_list": result})
+        elif request.path == "/manufacturer/search/":
+            result = Manufacturer.objects.filter(name__icontains=query)
+            return render(request, "taxi/manufacturer_list.html", context={"manufacturer_list": result})

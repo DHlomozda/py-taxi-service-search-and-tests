@@ -7,14 +7,6 @@
       Create
     </a>
   </h1>
-  <div>
-    <form method="post" action="{% url 'taxi:search-car' %}">
-      {% csrf_token %}
-      <label for="search-field"></label>
-      <input type="text" name="search" placeholder="Search..." id="search-field">
-      <button type="submit">Search</button>
-    </form>
-  </div>
   {% if car_list %}
     <ul>
       {% for car in car_list %}
@@ -27,4 +19,12 @@
   {% else %}
     <p>There are no cars in taxi</p>
   {% endif %}
+  <div>
+    <form method="post" action="{% url 'taxi:search-car' %}">
+      {% csrf_token %}
+      <label for="search-field"></label>
+      <input type="text" name="search" placeholder="Search..." id="search-field">
+      <button type="submit">Search</button>
+    </form>
+  </div>
 {% endblock %}

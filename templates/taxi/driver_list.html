@@ -32,7 +32,7 @@
       <p>There are no drivers in the service.</p>
     {% endif %}
   <div>
-    <form action="{% url 'taxi:search-driver' %}">
+    <form method="post" action="{% url 'taxi:search-driver' %}">
       {% csrf_token %}
       <input type="text" name="search" placeholder="Search...">
       <button type="submit">Search</button>
