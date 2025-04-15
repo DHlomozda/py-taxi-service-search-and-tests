@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
   <h1>
@@ -47,11 +48,13 @@
   {% else %}
     <p>There are no manufacturers in the service.</p>
   {% endif %}
-  <form method="post" action="{% url 'taxi:search-manufacture' %}">
-    {% csrf_token %}
-    <input name="search" placeholder="Search...">
-    <button type="submit">Submit</button>
-  </form>
+  <div class="mb-2">
+    <form action="" method="get">
+      {{ search_form|crispy }}
+      <input type="submit" class="btn btn-primary">
+    </form>
+  </div>
+
 
 
 {% endblock %}
