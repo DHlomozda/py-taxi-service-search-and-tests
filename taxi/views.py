@@ -6,8 +6,14 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Driver, Car, Manufacturer
-from .forms import DriverCreationForm, DriverLicenseUpdateForm, CarForm, CarSearchForm, ManufacturerSearchForm, \
+from .forms import (
+    DriverCreationForm,
+    DriverLicenseUpdateForm,
+    CarForm,
+    CarSearchForm,
+    ManufacturerSearchForm,
     DriverSearchForm
+)
 
 
 @login_required
@@ -169,10 +175,22 @@ def toggle_assign_to_car(request, pk):
 #         query = request.GET.get("search", "")
 #         if request.path == "/cars/search/":
 #             result = Car.objects.filter(model__icontains=query)
-#             return render(request, "taxi/car_list.html", context={"car_list": result})
+#             return render(
+#             request,
+#             "taxi/car_list.html",
+#             context={"car_list": result}
+#             )
 #         elif request.path == "/driver/search/":
 #             result = Driver.objects.filter(username__icontains=query)
-#             return render(request, "taxi/driver_list.html", context={"driver_list": result})
+#             return render(
+#             request,
+#             "taxi/driver_list.html",
+#             context={"driver_list": result}
+#             )
 #         elif request.path == "/manufacturer/search/":
 #             result = Manufacturer.objects.filter(name__icontains=query)
-#             return render(request, "taxi/manufacturer_list.html", context={"manufacturer_list": result})
+#             return render(
+#             request,
+#             "taxi/manufacturer_list.html",
+#             context={"manufacturer_list": result}
+#             )
