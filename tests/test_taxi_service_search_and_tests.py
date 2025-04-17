@@ -40,21 +40,32 @@ class ManufacturerTest(TestCase):
         with self.assertRaises(Exception):
             manufacturer.full_clean()
 
+    def test_search(self):
+        result = Manufacturer.objects.filter(name__icontains="Tes")
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].name, "Tesla")
+
 
 class DriverTest(TestCase):
     def setUp(self):
         self.driver1 = Driver.objects.create(
             username="driver1",
-            password="123"
+            password="123",
+            first_name="driver"
         )
 
     def test_str_method(self):
         driver = Driver.objects.get(id=1)
-        self.assertEqual(str(driver), "driver1 ( )")
+        self.assertEqual(str(driver), "driver1 (driver )")
 
     def test_get_absolute_url(self):
         driver = Driver.objects.get(id=1)
         self.assertEqual(driver.get_absolute_url(), "/drivers/1/")
+
+    def test_search(self):
+        result = Driver.objects.filter(first_name__icontains="dri")
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].first_name, "driver")
 
 
 class CarTest(TestCase):
@@ -72,3 +83,8 @@ class CarTest(TestCase):
 
     def test_str_method(self):
         self.assertEqual(str(self.car), "300")
+
+    def test_search(self):
+        result = Car.objects.filter(model__icontains="3")
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].model, "300")
