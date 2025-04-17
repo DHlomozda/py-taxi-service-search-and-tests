@@ -67,7 +67,7 @@ urlpatterns = [
         name="driver-delete",
     ),
     path("cars/search/", CarListView.as_view(), name="search-car"),
-    path("driver/search/", DriverListView.as_view(), name="search-driver"),
+    path("drivers/search/", DriverListView.as_view(), name="search-driver"),
     path(
         "manufacturer/search/",
         ManufacturerListView.as_view(),

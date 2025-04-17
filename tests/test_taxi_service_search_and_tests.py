@@ -51,21 +51,20 @@ class DriverTest(TestCase):
         self.driver1 = Driver.objects.create(
             username="driver1",
             password="123",
-            first_name="driver"
         )
 
     def test_str_method(self):
         driver = Driver.objects.get(id=1)
-        self.assertEqual(str(driver), "driver1 (driver )")
+        self.assertEqual(str(driver), "driver1 ( )")
 
     def test_get_absolute_url(self):
         driver = Driver.objects.get(id=1)
         self.assertEqual(driver.get_absolute_url(), "/drivers/1/")
 
     def test_search(self):
-        result = Driver.objects.filter(first_name__icontains="dri")
+        result = Driver.objects.filter(username__icontains="dri")
         self.assertEqual(len(result), 1)
-        self.assertEqual(result[0].first_name, "driver")
+        self.assertEqual(result[0].username, "driver1")
 
 
 class CarTest(TestCase):
